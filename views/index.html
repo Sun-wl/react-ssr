@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="theme-color" content="#012169" />
+  <title>React SSR</title>
+  <script type="text/javascript" src="bundle.js"></script>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="js_foreground" class="vx_foreground-container">
+    <div id="contents" class="contents vx_mainContent">
+      <div id="root"></div>
+    </div>
+  </div>
+  <script type="application/json" id="server-data">
+      <%- serializedServerData %>
+    </script>
+  <!-- <script type="text/javascript" nonce="${nonce}" src="${serverData.fpti.SDKUrl}"></script> -->
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+# OS
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# node
+node_modules
+
+# generated files
+coverage
+dist
+.gh-pages
+
+# lockfiles (you can remove these if you want them).
+yarn.lock
+
+# IDEs and editors
+.vscode
+.idea
+
+# local config
+.opt-in
+.opt-out
+.env
+
+# This is generated during the client-side build. It's taken by our
+# infrastructure scripts and uploaded to a CDN.
+.build
+.client-build
+
+# remoteconfig local cache
+server/.configcache
+
+# this is generated at build-time
+server/config/client-asset-manifest.json
+
+# functional reports
+test/functional/report
+.tmp/
+ccaggregator/
+logs/
+tdpdata.json
+tdpstdout.log
+.nyc_output/
