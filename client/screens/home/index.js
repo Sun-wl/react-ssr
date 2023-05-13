@@ -1,11 +1,12 @@
 import React from "react"
-// import { Link } from '@reach/router'
+import { Link } from '@reach/router'
 
 const Home = () => {
   return (
     <>
       <div>home page</div>
-      {/* <Link to="/money">link to money page</Link> */}
+      <Link to="/money">link to money page</Link>
+      <div>hello world</div>
     </>
   )
 }

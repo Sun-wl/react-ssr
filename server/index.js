@@ -8,7 +8,7 @@ app.use('/', indexRouter)
 
 // 静态资源
 app.use(express.static('public'));
-app.use(express.static('.client-build'));
+app.use(express.static('.build/js'));
 
 // 模版引擎
 app.engine('.html', ejs.__express)

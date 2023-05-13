@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.get('/home', serverRenderInitialze, controller.index)
 
+router.get('/money', serverRenderInitialze, controller.index)
+
 export default router

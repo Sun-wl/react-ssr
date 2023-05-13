@@ -43,3 +43,7 @@ logs/
 tdpdata.json
 tdpstdout.log
 .nyc_output/
+
+
+package-lock.json
+yarn.lock
