@@ -13,7 +13,16 @@ module.exports = {
                 "@babel/preset-env",
                 { useBuiltIns: "usage" }
               ],
-              "@babel/preset-react"
+              "@babel/preset-react",
+              [
+                "@emotion/babel-preset-css-prop",
+                {
+                  "autoLabel": "dev-only",
+                  "labelFormat": "[local]",
+                  "useBuiltIns": false,
+                  "throwIfNamespace": true
+                }
+              ]
             ]
           }
         }
