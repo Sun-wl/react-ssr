@@ -1,5 +1,5 @@
 import express from 'express';
-import ejs from 'ejs'
+import es6Renderer from 'express-es6-template-engine'
 import indexRouter from './routes/index'
 
 const app = express();
@@ -11,7 +11,7 @@ app.use(express.static('public'));
 app.use(express.static('.build/js'));
 
 // 模版引擎
-app.engine('.html', ejs.__express)
+app.engine('html', es6Renderer);
 app.set('view engine', 'html');
 
 

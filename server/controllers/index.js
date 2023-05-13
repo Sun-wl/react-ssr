@@ -6,14 +6,14 @@ function index(req, res) {
   const data = getServerRenderData(res)
   //debug log (logs to std out when DEBUG environment variable is set)
   console.log('rendering index with:', data)
-  res.render('index', data.locals)
+  res.render('index', data)
 }
 
 function renderErrorPage(err, req, res) {
   executeServerRenderInitialze(req, res, () => {
     updateCustomServerData(res, { error: err })
     const data = getServerRenderData(res)
-    res.render('index', data.locals)
+    res.render('index', data)
   })
 }
 
