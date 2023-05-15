@@ -46,7 +46,7 @@ module.exports = removeEmpty({
   context: path.resolve(__dirname, 'client'),
   entry: "./index.js",
   output: {
-    path: path.join(__dirname, "client/.build/js"),
+    path: path.join(__dirname, "client/.build"),
     filename: "bundle.js"
   },
   module: {
