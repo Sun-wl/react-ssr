@@ -1,3 +1,6 @@
+const { fromRoot } = require("./scripts/utils");
+
+
 module.exports = {
   mode: "development",
   module: {
@@ -8,22 +11,8 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: [
-              [
-                "@babel/preset-env",
-                { useBuiltIns: "usage" }
-              ],
-              "@babel/preset-react",
-              [
-                "@emotion/babel-preset-css-prop",
-                {
-                  "autoLabel": "dev-only",
-                  "labelFormat": "[local]",
-                  "useBuiltIns": false,
-                  "throwIfNamespace": true
-                }
-              ]
-            ]
+            cacheDirectory: true,
+            ...(require(fromRoot('.babelrc.js')))
           }
         }
       },

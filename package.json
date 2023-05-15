@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npm-run-all --parallel dev:*",
-    "dev:server-run": "nodemon --watch server/.build --exec \"node server/.build/bundle.js\"",
-    "dev:server-build": "webpack --config webpack.server.js --watch",
-    "dev:client-build": "webpack serve --config webpack.client.js"
+    "dev": "node index.js",
+    "build": "webpack --config webpack.server.js && webpack --config webpack.client.js"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +24,8 @@
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^0.19.2",
     "babel-loader": "^8.1.0",
+    "concurrently": "^8.0.1",
+    "cross-spawn": "^7.0.3",
     "express": "^4.17.1",
     "express-es6-template-engine": "^2.2.3",
     "express-http-proxy": "^1.6.3",
@@ -43,5 +43,8 @@
     "webpack-dev-server": "^4.15.0",
     "webpack-merge": "^5.8.0",
     "webpack-node-externals": "^1.7.2"
+  },
+  "devDependencies": {
+    "@babel/register": "^7.21.0"
   }
 }
