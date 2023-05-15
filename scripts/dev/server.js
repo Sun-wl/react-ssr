@@ -5,7 +5,7 @@ const { fromRoot } = require('../utils')
  * spawn.sync 执行命令
  * nodemon --config nodemon.json scripts/dev/server.run.js
  */
-const result = spawn.sync('nodemon',['--config', fromRoot('nodemon.json'), require.resolve('./server.run')], {
+const result = spawn.sync('nodemon',['--inspect','--config', fromRoot('nodemon.json'), require.resolve('./server.run')], {
   stdio: 'inherit'
 })
 
