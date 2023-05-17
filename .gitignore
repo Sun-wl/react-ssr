@@ -24,10 +24,6 @@ yarn.lock
 .opt-out
 .env
 
-# This is generated during the client-side build. It's taken by our
-# infrastructure scripts and uploaded to a CDN.
-.build
-.client-build
 
 # remoteconfig local cache
 server/.configcache

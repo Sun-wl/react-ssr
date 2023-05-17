@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="theme-color" content="#012169" />
   <title>React SSR</title>
-  <script type="text/javascript" src="bundle.js"></script>
+  ${customScripts.headHTML}
 </head>
 
 <body>
@@ -17,9 +17,10 @@
     </div>
   </div>
   <script type="application/json" id="server-data">
-      <%- serializedServerData %>
-    </script>
-  <!-- <script type="text/javascript" nonce="${nonce}" src="${serverData.fpti.SDKUrl}"></script> -->
+    ${serializedServerData}
+  </script>
+  ${customScripts.bodyHTML}
+
 </body>
 
 </html>
