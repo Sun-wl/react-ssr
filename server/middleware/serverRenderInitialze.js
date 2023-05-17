@@ -10,8 +10,8 @@ function setupLocals(req, res, next) {
 }
 
 export const executeServerRenderInitialze = (req, res, next) => {
-  const init = () => setupLocals(req, res, () => {
-    setupClientAssets(req, res, () => { })
+  const init = () => setupLocals(req, res, async () => {
+    await setupClientAssets(req, res, next)
   })
 
   if (!req.locale) {

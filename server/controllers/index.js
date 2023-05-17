@@ -1,6 +1,5 @@
 import { executeServerRenderInitialze } from '../middleware/serverRenderInitialze'
 import { updateCustomServerData, getServerRenderData } from '../utils/ssr'
-import path from 'path'
 
 function index(req, res) {
   const data = getServerRenderData(res)

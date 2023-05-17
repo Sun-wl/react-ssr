@@ -2,6 +2,7 @@ import React from "react";
 import { Router, Redirect } from '@reach/router'
 import ErrorBoundary from "./components/common/ErrorBoundary";
 import AppRoute from "./components/common/AppRoute";
+import './index.css'
 
 const Demo = React.lazy(() => import('./screens/demo'))
 const Home = React.lazy(() => import('./screens/home'))

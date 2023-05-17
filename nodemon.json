@@ -4,7 +4,6 @@
   "ext": ".ts,.tsx,.js,json",
   "ignore": [
     "**/__tests__/**",
-    "*/.build/*",
     ".configcache/",
     "**/client-asset-manifest.json"
   ]
