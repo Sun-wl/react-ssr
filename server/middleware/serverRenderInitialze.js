@@ -1,5 +1,6 @@
 
 import { updateCustomServerData } from '../utils/ssr'
+import { setupClientAssets } from './setupClientAssets'
 
 function setupLocals(req, res, next) {
   updateCustomServerData(res, {
@@ -9,7 +10,9 @@ function setupLocals(req, res, next) {
 }
 
 export const executeServerRenderInitialze = (req, res, next) => {
-  const init = () => setupLocals(req, res, () => { })
+  const init = () => setupLocals(req, res, async () => {
+    await setupClientAssets(req, res, next)
+  })
 
   if (!req.locale) {
 
@@ -20,4 +23,5 @@ export const executeServerRenderInitialze = (req, res, next) => {
 
 export const serverRenderInitialze = [
   setupLocals,
+  setupClientAssets
 ]
