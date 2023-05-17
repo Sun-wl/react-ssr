@@ -3,9 +3,9 @@ const { fromRoot } = require('../utils')
 
 /**
  * spawn.sync 执行命令
- * webpack serve --config webpack.config.js
+ * webpack serve --config webpack.client.js
  */
-const result = spawn.sync('webpack', ['serve', '--config', fromRoot('webpack.config.js')], {
+const result = spawn.sync('webpack', ['serve', '--config', fromRoot('webpack.client.js')], {
   stdio: 'inherit'
 })
 

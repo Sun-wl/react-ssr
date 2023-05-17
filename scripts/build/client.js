@@ -3,9 +3,9 @@ const { fromRoot } = require('../utils')
 
 /**
  * spawn.sync 执行命令
- * webpack-cli --config webpack.config.js
+ * webpack-cli --config webpack.client.js
  */
-const result = spawn.sync('webpack-cli', ['--config', fromRoot('webpack.config.js')], {
+const result = spawn.sync('webpack-cli', ['--config', fromRoot('webpack.client.js')], {
   stdio: 'inherit',
   env: {
     WEBPACK: true,

@@ -1,5 +1,3 @@
-// import spawn from 'cross-spawn'
-
 const { fromRoot } = require('../utils')
 
 // 编译server下的文件
