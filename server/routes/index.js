@@ -4,8 +4,9 @@ import { serverRenderInitialze } from '../middleware/serverRenderInitialze'
 
 const router = express.Router();
 
-router.get('/home', serverRenderInitialze, controller.index)
+router.get('/demo', serverRenderInitialze, controller.index)
 
+router.get('/money', serverRenderInitialze, controller.index)
 router.get('/money', serverRenderInitialze, controller.index)
 
 export default router
