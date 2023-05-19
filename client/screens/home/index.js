@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react'
 import { Link } from '@reach/router'
-import styled from "@emotion/styled"
+import styled from '@emotion/styled'
 
 const Title = styled.div`
   font-size: 20px;

@@ -1,10 +1,9 @@
-import path from 'path'
 
-export const ifProd = (prodArg = true, notProdArg) => process.env.NODE_ENV === 'production' ? prodArg : notProdArg
 
-export const cwd = process.cwd()
+export const componentName = 'react-ssr'
+
+export const ifProd = (prodArg = true, notProdArg) =>
+  process.env.NODE_ENV === 'production' ? prodArg : notProdArg
 
 export const getClientBundlePath = () => '/js'
-
-export const fromRoot = (...p) => path.join(cwd, ...p)
 

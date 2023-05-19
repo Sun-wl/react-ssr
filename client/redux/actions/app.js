@@ -1,9 +1,9 @@
-import { updateStatus } from "../slices/appSlice"
+import { updateStatus } from '../slices/appSlice'
 
-export const disableUser = () => dispatch => {
+export const disableUser = () => (dispatch) => {
   dispatch(updateStatus('disabled'))
 }
 
-export const enableUser = () => dispatch => {
+export const enableUser = () => (dispatch) => {
   dispatch(updateStatus('enabled'))
 }

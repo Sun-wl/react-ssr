@@ -1,1 +1,1 @@
-export const getShowNotification = state => state?.home?.showNotification
+export const getShowNotification = (state) => state?.home?.showNotification

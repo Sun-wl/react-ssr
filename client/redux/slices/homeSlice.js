@@ -8,16 +8,16 @@ export const homeSlice = createSlice({
     updateNotification: (state, action) => {
       return {
         ...state,
-        showNotification: action.payload
+        showNotification: action.payload,
       }
     },
     disableNotification: (state) => {
       return {
         ...state,
-        showNotification: false
+        showNotification: false,
       }
     },
-  }
+  },
 })
 
 export const { updateNotification, disableNotification } = homeSlice.actions

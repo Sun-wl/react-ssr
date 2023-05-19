@@ -28,7 +28,6 @@ function init() {
   } catch (err) {
     console.error('server-data: load', err)
   }
-
 }
 init()
 export default serverData
