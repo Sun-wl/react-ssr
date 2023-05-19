@@ -1,17 +1,24 @@
 const webpack = require('webpack')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const OptimilizeCssnanoPlugin = require('@intervolga/optimize-cssnano-plugin')
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const PostCompileWebpackPlugin = require('post-compile-webpack-plugin')
-const { removeEmpty } = require('webpack-config-utils');
-const path = require("path");
-const { fromRoot, ifProd, ifDev, hasFile } = require("./scripts/utils");
-const { isEqual } = require('lodash');
+const { removeEmpty } = require('webpack-config-utils')
+const path = require('path')
+const { isEqual } = require('lodash')
 const fse = require('fs-extra')
+const {
+  fromRoot,
+  ifProd,
+  ifDev,
+  hasFile,
+  cwd,
+  fromConfig,
+} = require('../utils')
 
 const styleLoader = {
-  loader: 'style-loader'
+  loader: 'style-loader',
 }
 const getCssLoader = (options) => ({
   loader: 'css-loader',
@@ -21,8 +28,8 @@ const getCssLoader = (options) => ({
     },
     importLoaders: 1,
     sourceMap: true,
-    ...options
-  }
+    ...options,
+  },
 })
 const postcssLoader = {
   loader: 'postcss-loader',
@@ -38,21 +45,21 @@ const postcssLoader = {
             'Firefox ESR',
             'not ie < 9',
           ],
-          flexbox: 'no-2009'
-        })
-      ]
-    }
-  }
+          flexbox: 'no-2009',
+        }),
+      ],
+    },
+  },
 }
 
 const clientBuildPath = 'dist/client/js'
 module.exports = removeEmpty({
   mode: ifProd('production', 'development'),
-  context: path.resolve(__dirname, 'client'),
-  entry: "./index.js",
+  context: path.resolve(cwd, 'client'),
+  entry: './index.js',
   output: {
-    path: path.join(__dirname, clientBuildPath),
-    filename: ifProd("bundle.[fullhash].js", "bundle.js")
+    path: path.join(cwd, clientBuildPath),
+    filename: ifProd('bundle.[fullhash].js', 'bundle.js'),
   },
   module: {
     rules: [
@@ -62,20 +69,20 @@ module.exports = removeEmpty({
             test: /\.(js|tsx|ts)$/,
             include: fromRoot('client'),
             exclude: /node_modules/,
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
               cacheDirectory: true,
-              ...(require(fromRoot('.babelrc.js')))
-            }
+              ...require(fromConfig('.babelrc.js')),
+            },
           },
           {
             test: [/\.bmp$/, /\.gif$/, /\.jep?g$/, /\.png$/],
             exclude: /node_modules/,
-            loader: "url-loader",
+            loader: 'url-loader',
             options: {
               limit: 100000,
-              name: 'assets/[name].[ext]'
-            }
+              name: 'assets/[name].[ext]',
+            },
           },
           {
             test: /\.module\.css$/,
@@ -83,7 +90,7 @@ module.exports = removeEmpty({
               ifProd(MiniCssExtractPlugin.loader, styleLoader),
               getCssLoader({ modules: true }),
               postcssLoader,
-            ]
+            ],
           },
           {
             test: /\.css$/,
@@ -92,7 +99,7 @@ module.exports = removeEmpty({
               ifProd(MiniCssExtractPlugin.loader, styleLoader),
               getCssLoader({ modules: false }),
               postcssLoader,
-            ]
+            ],
           },
           {
             test: /\.scss$/,
@@ -103,9 +110,9 @@ module.exports = removeEmpty({
                 loader: 'sass-loader',
                 options: {
                   sourceMap: true,
-                }
-              }
-            ]
+                },
+              },
+            ],
           },
           {
             exclude: [
@@ -118,28 +125,38 @@ module.exports = removeEmpty({
             ],
             loader: 'file-loader',
             options: {
-              name: 'assets/[name].[ext]'
-            }
-          }
-        ].filter(Boolean)
+              name: 'assets/[name].[ext]',
+            },
+          },
+        ].filter(Boolean),
       },
-    ]
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.CLIENT_PORT': JSON.stringify(process.env.CLIENT_PORT),
       'process.env.PORT': JSON.stringify(process.env.PORT),
     }),
-    new webpack.IgnorePlugin({ resourceRegExp: /^\.locale$/, contextRegExp: /moment$/ }),
+    new webpack.IgnorePlugin({
+      resourceRegExp: /^\.locale$/,
+      contextRegExp: /moment$/,
+    }),
     // // 避免由于模块路径大小写问题引起的错误
     ifDev(new CaseSensitivePathsPlugin()),
-    ifProd(new MiniCssExtractPlugin({ filename: '[name].[chunkhash].css' })),
-    ifProd(new OptimilizeCssnanoPlugin({
-      sourceMap: true,
-      cssnanoOptions: {
-        preset: ['default']
-      }
-    })),
+    ifProd(
+      new MiniCssExtractPlugin({
+        filename: '[name].[fullhash].css',
+        chunkFilename: '[name].[chunkhash].css',
+      }),
+    ),
+    ifProd(
+      new OptimilizeCssnanoPlugin({
+        sourceMap: true,
+        cssnanoOptions: {
+          preset: ['default'],
+        },
+      }),
+    ),
     new WebpackManifestPlugin({
       fileName: 'client-asset-manifest.json',
       writeToFileEmit: true,
@@ -149,17 +166,14 @@ module.exports = removeEmpty({
       },
       generate(seed, files) {
         return files.reduce((manifest, asset) => {
-          const {
-            chunk: ignoredChunk,
-            ...assetProps
-          } = asset
+          const { chunk: ignoredChunk, ...assetProps } = asset
           manifest.assets[asset.name] = {
             ...assetProps,
             path: assetProps.path.replace(/^auto\//, ''),
           }
           return manifest
         }, seed)
-      }
+      },
     }),
     new PostCompileWebpackPlugin(() => {
       // 编译完成后将 client-asset-manifest.json copy 到 server/client 下
@@ -174,15 +188,10 @@ module.exports = removeEmpty({
         }
         if (changed) {
           fse.ensureDirSync(fromRoot('server/config'))
-          fse.copySync(
-            fromRoot(clientManifest),
-            fromRoot(copyToServerManifest)
-          )
+          fse.copySync(fromRoot(clientManifest), fromRoot(copyToServerManifest))
         }
       }
-
-    })
-
+    }),
   ].filter(Boolean),
   optimization: {
     moduleIds: 'named',
@@ -192,10 +201,10 @@ module.exports = removeEmpty({
   devServer: {
     client: {
       logging: 'info',
-      overlay: false
+      overlay: false,
     },
     static: {
-      directory: path.join(__dirname, clientBuildPath),
+      directory: path.join(cwd, clientBuildPath),
     },
     allowedHosts: ['localhost'],
     host: 'localhost',
@@ -206,7 +215,5 @@ module.exports = removeEmpty({
     hints: ifProd('warning', false),
     maxEntrypointSize: 1000000,
     maxAssetSize: 1000000,
-  }
-
-
+  },
 })

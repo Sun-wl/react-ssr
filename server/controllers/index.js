@@ -3,7 +3,7 @@ import { updateCustomServerData, getServerRenderData } from '../utils/ssr'
 
 function index(req, res) {
   const data = getServerRenderData(res)
-  //debug log (logs to std out when DEBUG environment variable is set)
+  // eslint-disable-next-line no-console
   console.log('rendering index with:', data)
   res.render('index', data)
 }

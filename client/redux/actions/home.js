@@ -1,10 +1,13 @@
-import { updateNotification, disableNotification as disableNoti } from "../slices/homeSlice"
+import {
+  updateNotification,
+  disableNotification as disableNoti,
+} from '../slices/homeSlice'
 
-export const enableNotification = () => dispatch => {
+export const enableNotification = () => (dispatch) => {
   dispatch(updateNotification(true))
 }
 
-export const disableNotification = () => dispatch => {
+export const disableNotification = () => (dispatch) => {
   dispatch(disableNoti())
 }
 

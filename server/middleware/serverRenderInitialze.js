@@ -1,4 +1,3 @@
-
 import { updateCustomServerData } from '../utils/ssr'
 import { setupClientAssets } from './setupClientAssets'
 
@@ -10,18 +9,17 @@ function setupLocals(req, res, next) {
 }
 
 export const executeServerRenderInitialze = (req, res, next) => {
-  const init = () => setupLocals(req, res, async () => {
-    await setupClientAssets(req, res, next)
-  })
+  const init = () =>
+    setupLocals(req, res, async () => {
+      await setupClientAssets(req, res, next)
+    })
 
   if (!req.locale) {
-
+    // TODO
+    init()
   } else {
     init()
   }
 }
 
-export const serverRenderInitialze = [
-  setupLocals,
-  setupClientAssets
-]
+export const serverRenderInitialze = [setupLocals, setupClientAssets]

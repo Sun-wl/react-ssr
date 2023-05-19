@@ -1,11 +1,11 @@
 const spawn = require('cross-spawn')
-const { fromRoot } = require('../utils')
+const { fromConfig } = require('../../utils')
 
 /**
  * spawn.sync 执行命令
  * webpack-cli --config webpack.server.js
  */
-const result = spawn.sync('webpack-cli', ['--config', fromRoot('webpack.server.js')], {
+const result = spawn.sync('webpack-cli', ['--config', fromConfig('webpack.server.js')], {
   stdio: 'inherit',
   env: {
     WEBPACK: true,

@@ -8,10 +8,10 @@ export const appSlice = createSlice({
     updateStatus: (state, action) => {
       return {
         ...state,
-        status: action.payload
+        status: action.payload,
       }
-    }
-  }
+    },
+  },
 })
 
 export const { updateStatus } = appSlice.actions

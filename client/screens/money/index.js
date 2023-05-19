@@ -1,9 +1,7 @@
-import React from "react";
+import React from 'react'
 
 const Money = () => {
-  return (
-    <div>money page</div>
-  )
+  return <div>money page</div>
 }
 
 export default Money

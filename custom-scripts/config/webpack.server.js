@@ -1,21 +1,21 @@
-const path = require('path');
-const { removeEmpty } = require('webpack-config-utils');
+const path = require('path')
+const { removeEmpty } = require('webpack-config-utils')
 const PostCompileWebpackPlugin = require('post-compile-webpack-plugin')
-const nodeExternals = require('webpack-node-externals');
+const nodeExternals = require('webpack-node-externals')
 const rimraf = require('rimraf')
 const cpy = require('cpy')
-const { ifProd, fromRoot } = require('./scripts/utils');
+const { ifProd, fromRoot, cwd, fromConfig } = require('../utils')
 
 const serverBuildPath = 'dist'
 module.exports = removeEmpty({
   mode: ifProd('production', 'development'),
-  context: path.resolve(__dirname, 'server'),
+  context: path.resolve(cwd, 'server'),
   target: 'node',
   externals: [nodeExternals()],
-  entry: "./index.js",
+  entry: './index.js',
   output: {
-    path: path.join(__dirname, serverBuildPath),
-    filename: 'index.js'
+    path: path.join(cwd, serverBuildPath),
+    filename: 'index.js',
   },
   module: {
     rules: [
@@ -25,15 +25,15 @@ module.exports = removeEmpty({
             test: /\.(js|tsx|ts)$/,
             include: fromRoot('server'),
             exclude: /node_modules/,
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
               cacheDirectory: true,
-              ...(require(fromRoot('.babelrc.js')))
-            }
+              ...require(fromConfig('.babelrc.js')),
+            },
           },
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
   plugins: [
     new PostCompileWebpackPlugin(() => {
@@ -45,11 +45,10 @@ module.exports = removeEmpty({
         parents: true,
         cwd: fromRoot('server/views'),
         nodir: true,
-      }).catch(error => {
+      }).catch((error) => {
         console.error(error)
         process.exit(1)
       })
-    })
+    }),
   ],
-  
 })
