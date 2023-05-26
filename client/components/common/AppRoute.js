@@ -6,7 +6,7 @@ const AppRoute = ({ component: Component, ...rest }) => {
 }
 
 AppRoute.propTypes = {
-  component: PropTypes.node,
+  // component: PropTypes.node,
 }
 
 export default AppRoute
