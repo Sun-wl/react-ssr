@@ -1,6 +1,6 @@
 import proxy from 'express-http-proxy'
 import serveStatic from 'serve-static'
-import { getClientBundlePath, ifProd } from './common'
+import { getClientBundlePath, ifProd } from '../utils/common'
 
 // dev 模式下，为 client bundle 设置代理，访问 client server
 const setupWebpackProxy = (app) => {

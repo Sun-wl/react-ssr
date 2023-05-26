@@ -1,14 +1,20 @@
 import path from 'path'
 import express from 'express'
 import es6Renderer from 'express-es6-template-engine'
-import setupWebpackProxy from './utils/setupWebpackProxy'
+import setupWebpackProxy from './lib/setupWebpackProxy'
 import indexRouter from './routes/index'
+import apiRouter from './routes/api'
+import { responseError } from './lib/error/errorResponse'
 
 const app = express()
 
 setupWebpackProxy(app)
 
 app.use('/', indexRouter)
+app.use('/api/', apiRouter)
+app.use((err, req, res, next) => {
+  responseError(req, res, err, next)
+})
 
 // 静态资源
 app.use(express.static('public'))
@@ -23,8 +29,7 @@ app.listen(port, () => {
   const address = `http://localhost:${port}`
   // eslint-disable-next-line no-console
   console.log(
-    `[${new Date()}] [${
-      process.env.NODE_ENV || 'DEVELOPMENT'
+    `[${new Date()}] [${process.env.NODE_ENV || 'DEVELOPMENT'
     }] app is listening on: ${address}`,
   )
 })
