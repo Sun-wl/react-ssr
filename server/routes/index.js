@@ -11,5 +11,4 @@ router.get('/demo', serverRenderInitialze, setDemoData, controller.index)
 // 匹配除了 /api/ 开头以外的所有路由
 router.get(/^(?!\/api\/).*/, serverRenderInitialze, controller.index)
 
-
 export default router
