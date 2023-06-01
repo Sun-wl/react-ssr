@@ -1,9 +1,12 @@
+import { getCachedUserInfo } from '../models/cache'
 import { updateCustomServerData } from '../utils/ssr'
 import { setupClientAssets } from './setupClientAssets'
 
-function setupLocals(req, res, next) {
+const setupLocals = async (req, res, next) => {
+  await getCachedUserInfo(req)
   updateCustomServerData(res, {
     locale: 'zh-CN',
+    userInfo: req?.session?.user
   })
   next()
 }
