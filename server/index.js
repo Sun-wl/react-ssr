@@ -5,10 +5,13 @@ import setupWebpackProxy from './lib/setupWebpackProxy'
 import indexRouter from './routes/index'
 import apiRouter from './routes/api'
 import { responseError } from './lib/error/errorResponse'
+import connectRedis from './middleware/connectRedis'
 
 const app = express()
 
 setupWebpackProxy(app)
+
+app.use(connectRedis({ expiryMinute: 30 }))
 
 app.use('/', indexRouter)
 app.use('/api/', apiRouter)
