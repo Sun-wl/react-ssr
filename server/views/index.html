@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="theme-color" content="#012169" />
-    <title>React SSR</title>
-    ${customScripts.headHTML}
-  </head>
 
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="js_foreground" class="vx_foreground-container">
-      <div id="contents" class="contents vx_mainContent">
-        <div id="root"></div>
-      </div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="theme-color" content="#012169" />
+  <link rel="shortcut icon" type="image/x-icon" href="js/assets/favicon.png" />
+  <title>React SSR</title>
+  ${customScripts.headHTML}
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="js_foreground" class="vx_foreground-container">
+    <div id="contents" class="contents vx_mainContent">
+      <div id="root"></div>
     </div>
-    <script type="application/json" id="server-data">
+  </div>
+  <script type="application/json" id="server-data">
       ${serializedServerData}
     </script>
-    ${customScripts.bodyHTML}
-  </body>
+  ${customScripts.bodyHTML}
+</body>
 </html>

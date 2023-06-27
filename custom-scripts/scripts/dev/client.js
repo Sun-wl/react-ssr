@@ -10,6 +10,12 @@ const result = spawn.sync(
   ['serve', '--config', fromConfig('webpack.client.js')],
   {
     stdio: 'inherit',
+    env: {
+      WEBPACK: true,
+      DEV_WEBPACK: true,
+      WEBPACK_SERVE: true,
+      ...process.env,
+    }
   },
 )
 

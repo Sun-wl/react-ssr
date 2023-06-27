@@ -4,6 +4,7 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const OptimilizeCssnanoPlugin = require('@intervolga/optimize-cssnano-plugin')
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const PostCompileWebpackPlugin = require('post-compile-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { removeEmpty } = require('webpack-config-utils')
 const path = require('path')
 const { isEqual } = require('lodash')
@@ -157,6 +158,11 @@ module.exports = removeEmpty({
         },
       }),
     ),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'assets', to: 'assets', info: { onlyIfChanged: true } }, // 指定要复制的源目录和目标目录
+      ],
+    }),
     new WebpackManifestPlugin({
       fileName: 'client-asset-manifest.json',
       writeToFileEmit: true,

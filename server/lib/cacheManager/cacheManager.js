@@ -1,3 +1,5 @@
+import logger from "../logger"
+
 class CacheManager {
   constructor({ store }) {
     this.store = store
@@ -5,8 +7,7 @@ class CacheManager {
   async get(req, key, loader, payload, options = {}) {
     const value = await this.store.get(req, key)
     if (value) {
-      // eslint-disable-next-line no-console
-      console.log(`get data from cache [${key}]`)
+      logger.info(req, `get data from cache [${key}]`)
       return value
     }
     const data = await loader(req, payload)
