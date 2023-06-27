@@ -14,6 +14,8 @@ dist
 
 # lockfiles (you can remove these if you want them).
 yarn.lock
+package-lock.json
+*.log
 
 # IDEs and editors
 .vscode
@@ -41,6 +43,3 @@ tdpstdout.log
 .nyc_output/
 
 
-package-lock.json
-yarn.lock
-*.log

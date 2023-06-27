@@ -2,6 +2,7 @@ import superagent from "superagent";
 import superagentUse from 'superagent-use';
 import superagentProxy from 'superagent-proxy'
 import { PROXY } from "../utils/constants";
+import logger from "./logger";
 superagentProxy(superagent)
 
 const maskSensitiveDataLog = (data = {}, sensitiveDataKey = []) => {
@@ -19,23 +20,26 @@ const requestMiddlewire = (ctx, options) => {
     req
       .on('request', () => {
         const maskedDataKey = options?.maskedDataKey
-        console.log('Http API call request')
-        console.log('url', req.url)
-        console.log('method', req.method)
-        console.log('payload', maskSensitiveDataLog(req._data, maskedDataKey))
+        logger.info(ctx, 'Http API call request', {
+          url: req.url,
+          method: req.method,
+          payload: maskSensitiveDataLog(req._data, maskedDataKey)
+        })
       })
       .on('response', res => {
         if (res.statusCode >= 200 && res.statusCode < 300) {
-          console.log('Http API call success')
-          console.log('url', req.url)
-          console.log('method', req.method)
-          console.log('statusCode', res.statusCode)
+          logger.info(ctx, 'Http API call success', {
+            url: req.url,
+            method: req.method,
+            status_code: res.statusCode
+          })
         } else {
-          console.log('Http API call failed')
-          console.log('url', req.url)
-          console.log('method', req.method)
-          console.log('statusCode', res.statusCode)
-          console.log('body', res.body)
+          logger.error(ctx, 'Http API call failed',{
+            url: req.url,
+            method: req.method,
+            status_code:res.statusCode,
+            body: res.body
+          })
         }
       })
   }

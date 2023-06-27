@@ -18,6 +18,11 @@ const scripts = [
  */
 const result = spawn.sync('concurrently', scripts, {
   stdio: 'inherit',
+  env: {
+    NODE_ENV: 'development',
+    CONCURRENTLY: true,
+    ...process.env,
+  }
 })
 
 // 命令执行完成或出现error 后退出

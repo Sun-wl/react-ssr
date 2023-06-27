@@ -9,7 +9,8 @@ const result = spawn.sync('webpack-cli', ['--config', fromConfig('webpack.client
   stdio: 'inherit',
   env: {
     WEBPACK: true,
-    NODE_ENV: 'production'
+    NODE_ENV: 'production',
+    ...process.env,
   }
 })
 

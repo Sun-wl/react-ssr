@@ -1,5 +1,6 @@
 import url from 'url'
 import { getClientBundlePath } from '../utils/common'
+import { isDev } from '../utils/deployEnv'
 
 const getManifest = async () => {
   const manifest = await import(
@@ -51,17 +52,16 @@ const getClientAssetTags = async () => {
   const linkTags = getLinkTag({ assetBaseUrl, manifest, assets })
   const scriptTags = getScriptTags({ assetBaseUrl, manifest, assets })
 
-  const isDev = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV
   const headHTML = [
     `<script type="text/javascript">window.webpackPublicPath = '${assetBaseUrl}';</script>`,
     linkTags,
-    isDev ? scriptTags : null,
+    isDev() ? scriptTags : null,
   ]
     .filter(Boolean)
     .join('\n')
     .trim()
 
-  const bodyHTML = [isDev ? null : scriptTags].filter(Boolean).join('\n').trim()
+  const bodyHTML = [isDev() ? null : scriptTags].filter(Boolean).join('\n').trim()
   return { headHTML, bodyHTML }
 }
 

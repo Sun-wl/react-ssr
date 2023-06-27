@@ -3,8 +3,8 @@ import session from 'express-session'
 import connectRedis from 'connect-redis'
 import { v1 } from 'uuid'
 import redisClient from '../lib/redisClient'
-import { isDev } from '../utils/common'
 import configs from '../config'
+import { isDev } from '../utils/deployEnv'
 const RedisStore = connectRedis(session)
 
 

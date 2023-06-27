@@ -20,7 +20,7 @@ app.use((err, req, res, next) => {
 })
 
 // 静态资源
-app.use(express.static('public'))
+// app.use(express.static('public'))
 
 // 模版引擎
 app.engine('html', es6Renderer)

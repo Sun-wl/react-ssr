@@ -1,6 +1,7 @@
 import { responseError } from '../lib/error/errorResponse'
 import * as demoModel from '../models/demo'
 import { updateCustomServerData } from '../utils/ssr'
+import logger from '../lib/logger'
 
 export const setDemoData = async (req, res, next) => {
   try {
@@ -12,8 +13,7 @@ export const setDemoData = async (req, res, next) => {
     })
     return next()
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log('set demo data error ---', err)
+    logger.error(req, 'set demo data error', err)
     return responseError(req, res, err)
   }
 }
@@ -26,8 +26,7 @@ export const addDemo = async (req, res) => {
       isSuccess
     })
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log('add demo error')
+    logger.error(req, 'add demo error', err)
     return responseError(req, res, err)
   }
 }
