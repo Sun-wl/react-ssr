@@ -5,6 +5,6 @@ export const getUserInfo = (req) => {
   }
 }
 
-export const getStatus = (req) => {
-  return 'OPEN'
-}
+// export const getStatus = (req) => {
+//   return 'OPEN'
+// }

@@ -9,6 +9,8 @@ import { enableNotification } from '../../redux/actions/home'
 import * as demoRequest from '../../apis/demo'
 import useAsync from '../../hooks/useAsync'
 import { getDemoList } from '../../redux/selector/demo'
+import { getMonthsBetweenDates } from '../../utils/moment'
+
 
 const Title = styled.div`
   font-size: 20px;
@@ -20,6 +22,8 @@ const Demo = () => {
   const status = useSelector(getStatus)
   const showNotification = useSelector(getShowNotification)
   const demoList = useSelector(getDemoList)
+  const data = getMonthsBetweenDates()
+  console.log(data)
   // eslint-disable-next-line no-console
   console.log(username, status, showNotification)
   useEffect(() => {
